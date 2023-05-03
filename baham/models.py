@@ -38,7 +38,7 @@ class Vehicle(models.Model):
             raise ValueError("Only staff members can delete vehicles.")
         super().delete(*args, **kwargs)
 
-class Profile(models.Model):
+class User(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -79,7 +79,7 @@ class Owner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_joined = models.DateTimeField(auto_now_add=True)
     num_contracts = models.PositiveIntegerField(default=0)
-
+    
     def __str__(self):
         return self.user.first_name + ' ' + self.user.last_name
 
@@ -91,6 +91,7 @@ class Companion(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return self.user.first_name + ' ' + self.user.last_name
 
